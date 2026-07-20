@@ -583,7 +583,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:52px 0 40px}
       </div>
     </div>
 
-    <form class="reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+   <form class="reveal" id="contact-form">
       <div class="field">
         <label for="name">Nombre</label>
         <input type="text" id="name" name="name" required>
@@ -600,6 +600,15 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:52px 0 40px}
         <label for="message">¿Qué necesitas?</label>
         <textarea id="message" name="message" required></textarea>
       </div>
+
+      <!-- Honeypot: hidden from real users, bots often fill it in -->
+      <div class="field" style="position:absolute; left:-9999px;" aria-hidden="true">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="field-message" id="form-status" role="status"></div>
+
       <button type="submit">Enviar mensaje</button>
     </form>
   </div>
@@ -636,6 +645,53 @@ const io=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
 },{threshold:.12,rootMargin:'0px 0px -60px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script>
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  const endpoint = 'https://spaceracedigital.com/wp-json/staticformz/v1/contact';
+
+  function setStatus(message, state) {
+    status.textContent = message;
+    status.classList.remove('success', 'error', 'loading');
+    if (state) status.classList.add(state);
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    setStatus('Enviando...', 'loading');
+
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      company: form.company.value,
+      message: form.message.value,
+      website: form.website.value // honeypot, should stay empty
+    };
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const result = await res.json();
+
+      if (res.ok && result.success) {
+        setStatus(result.message || '¡Gracias! Tu mensaje ha sido enviado.', 'success');
+        form.reset();
+      } else {
+        setStatus(result.message || 'Hubo un error. Intenta de nuevo.', 'error');
+      }
+    } catch (err) {
+      setStatus('No se pudo enviar el mensaje. Revisa tu conexión.', 'error');
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
 </script>
 </body>
 </html>
