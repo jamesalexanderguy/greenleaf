@@ -238,11 +238,12 @@ h2{
 .marquee:hover .track{animation-play-state:paused}
 @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-25%)}}
 .logo-item{
-  font-family:var(--display);font-size:21px;font-weight:500;letter-spacing:-.01em;
-  color:var(--muted);opacity:.45;white-space:nowrap;filter:grayscale(1);
-  transition:opacity .35s ease,color .35s ease;padding:8px 0;height:34px;width:auto;object-fit:contain;
+  white-space:nowrap;
+  filter:brightness(0) invert(0.55);
+  transition:filter .35s ease;
+  padding:8px 0;height:34px;width:auto;object-fit:contain;
 }
-.logo-item:hover{opacity:.95;color:var(--ink)}
+.logo-item:hover{filter:brightness(0) invert(0.15)}
 
 /* contact */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
@@ -545,28 +546,24 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:52px 0 40px}
       <img class="logo-item" src="logos/glberkeley.svg" alt="UC Berkeley">
       <img class="logo-item" src="logos/gluc.svg" alt="UC Davis">
       <img class="logo-item" src="logos/glgeneratecanada.svg" alt="Generate Canada">
-      <img class="logo-item" src="logos/glcpp.svg" alt="Canada Plastics Pact">
       <img class="logo-item" src="logos/glcanza.svg" alt="CANZA">
       <img class="logo-item" src="logos/glgreenpeace.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glpearson.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glberkeley.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/gluc.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glgeneratecanada.svg" aria-hidden="true" alt="">
-      <img class="logo-item" src="logos/glcpp.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glcanza.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glgreenpeace.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glpearson.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glberkeley.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/gluc.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glgeneratecanada.svg" aria-hidden="true" alt="">
-      <img class="logo-item" src="logos/glcpp.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glcanza.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glgreenpeace.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glpearson.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glberkeley.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/gluc.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glgeneratecanada.svg" aria-hidden="true" alt="">
-      <img class="logo-item" src="logos/glcpp.svg" aria-hidden="true" alt="">
       <img class="logo-item" src="logos/glcanza.svg" aria-hidden="true" alt="">
     </div>
   </div>
